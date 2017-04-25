@@ -5,7 +5,7 @@
 The recommended way to include this sdk into your project is by using npm. Install it into your project as a dependency with
 
 ```sh
-$ npm install react-notify-toast --save
+$ npm install react-notify-toast-mobile-fix --save
 ```
 
 ## How to use
@@ -19,7 +19,7 @@ To include this project you need to require the module by using CommonJS syntax 
 
 ```js
 // ES6
-import Notifications, {notify} from 'react-notify-toast';
+import Notifications, {notify} from 'react-notify-toast-mobile-fix';
 /* Notifications is the default export.
    It represents the React Component that contains the notifications.
 
