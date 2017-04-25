@@ -1,8 +1,8 @@
 {
-  "name": "react-notify-toast",
+  "name": "react-notify-toast-mobile-fix",
   "title": "React Notify Toast",
-  "version": "0.1.5",
-  "description": "Toast notifications for React.js",
+  "version": "0.1.6",
+  "description": "Toast notifications for React.js with support for mobile devices",
   "keywords": ["react", "toast", "notification", "component", "notify"],
   "author": "Jesús Otero <hello@jesusoterogomez.com>",
   "main": "bin/notify.js",
