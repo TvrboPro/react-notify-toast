@@ -35,13 +35,13 @@ class Toast extends React.Component {
 
 		const containerStyle = {
 			position: 'fixed',
-			width: '50%',
+			width: '100%',
 			margin: '0 auto',
 			right: '0px',
-			top: '-100px',
+			top: '-110px',
 			left: '0px',
 			textAlign: 'center',
-			zIndex: '999',
+			zIndex: '999999',
 			pointerEvents: 'none',
 			transition: 'all ' + animationDuration + 'ms ease',
 			transform: 'translateY(0px)',
@@ -58,12 +58,14 @@ class Toast extends React.Component {
 
 		const contentStyle = {
 			cursor: 'pointer',
-			display: 'inline',
-			width: 'auto',
+			display: 'block',
+			width: '100%',
 			borderRadius: '0 0 4px 4px',
 			backgroundColor: 'white',
 			padding: '10px 30px',
-			pointerEvents: 'all'
+			pointerEvents: 'all',
+			maxWidth:'300px',
+			margin:'0 auto'
 		};
 
 		/* If type is set, merge toast action styles with base */
@@ -163,7 +165,7 @@ class Toast extends React.Component {
 		let {styleParent} = this.state;
 		return (
 			<div className="toast-notification" style={styleParent}>
-				<span className={type} style={styles.content}>{text}</span>
+				<div className={type} style={styles.content}>{text}</div>
 			</div>
 		);
 	}
