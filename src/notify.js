@@ -1,4 +1,5 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import assign from 'object-assign';
 
@@ -64,8 +65,8 @@ class Toast extends React.Component {
 			backgroundColor: 'white',
 			padding: '10px 30px',
 			pointerEvents: 'all',
-			maxWidth:'300px',
-			margin:'0 auto'
+			maxWidth: '300px',
+			margin: '0 auto'
 		};
 
 		/* If type is set, merge toast action styles with base */
@@ -124,7 +125,7 @@ class Toast extends React.Component {
 			MozTransform: 'translateY(108px)'
 		};
 
-		setTimeout(function() {
+		setTimeout(function () {
 			context.updateStyle(base, stylesShow);
 		}, 100); // wait 100ms after the component is called to animate toast.
 
@@ -141,17 +142,17 @@ class Toast extends React.Component {
 			MozTransform: 'translateY(-108px)'
 		};
 
-		setTimeout(function() {
+		setTimeout(function () {
 			context.updateStyle(base, stylesHide);
 		}, this.props.timeout);
 	}
 
 	updateStyle(base, update) {
-		this.setState({styleParent: assign({}, base, update)});
+		this.setState({ styleParent: assign({}, base, update) });
 	}
 
 	getBaseStyle() {
-		this.setState({styleParent: this.getStyles().container});
+		this.setState({ styleParent: this.getStyles().container });
 	}
 
 	componentDidMount() {
@@ -160,9 +161,9 @@ class Toast extends React.Component {
 	}
 
 	render() {
-		let {text, type} = this.props;
+		let { text, type } = this.props;
 		let styles = this.getStyles();
-		let {styleParent} = this.state;
+		let { styleParent } = this.state;
 		return (
 			<div className="toast-notification" style={styleParent}>
 				<div className={type} style={styles.content}>{text}</div>
@@ -176,7 +177,7 @@ class Toast extends React.Component {
 /* Render React component */
 function renderToast(text, type, timeout, color) {
 	ReactDOM.render(
-		<Toast text={text} timeout={timeout} type={type} color={color}/>,
+		<Toast text={text} timeout={timeout} type={type} color={color} />,
 		document.getElementById(notificationWrapperId)
 	);
 }
@@ -207,13 +208,13 @@ function show(text, type, timeout, color) {
 		}
 
 		// Unmount react component after the animation finished.
-		setTimeout(function() {
+		setTimeout(function () {
 			hideToast();
 		}, renderTimeout + animationDuration);
 
-        return true;
+		return true;
 	}
-    return false;
+	return false;
 }
 
 /**
@@ -226,48 +227,48 @@ function show(text, type, timeout, color) {
  * @return {[type]}                      [description]
  */
 function createShowQueue(initialRecallDelay = 500, recallDelayIncrement = 500) {
-    // Array to hold queued messages
-    this.msgs = [];
+	// Array to hold queued messages
+	this.msgs = [];
 
-    // Is the showNotify function in progress - used so we can call showNotify when a
-    // message is added to an empty queue.
-    this.isNotifying = false;
+	// Is the showNotify function in progress - used so we can call showNotify when a
+	// message is added to an empty queue.
+	this.isNotifying = false;
 
-    this.currentRecallDelay = initialRecallDelay;
+	this.currentRecallDelay = initialRecallDelay;
 
-    // Retrieve the next message from the queue and try to show it
-    this.showNotify = () => {
-        // If there are no messages in the queue
-        if (this.msgs.length === 0) {
-            this.isNotifying = false;
-            return;
-        }
+	// Retrieve the next message from the queue and try to show it
+	this.showNotify = () => {
+		// If there are no messages in the queue
+		if (this.msgs.length === 0) {
+			this.isNotifying = false;
+			return;
+		}
 
-        this.isNotifying = true;
+		this.isNotifying = true;
 
-        const current = this.msgs.pop();
+		const current = this.msgs.pop();
 
-        // show will now return true if it is able to send the message,
-        // or false if there is an existing message
-        if (show(current.text, current.type, current.timeout, current.color)) {
-            this.currentRecallDelay = initialRecallDelay;
-            if (current.timeout > 0) {
-                setTimeout(() => this.showNotify(), current.timeout + animationDuration);
-            }
-        } else {
-            // If message show failed, re-add the current message to the front of the queue
-            this.msgs.unshift(current);
-            setTimeout(() => this.showNotify(), this.currentRecallDelay);
-            this.currentRecallDelay += recallDelayIncrement;
-        }
-    };
+		// show will now return true if it is able to send the message,
+		// or false if there is an existing message
+		if (show(current.text, current.type, current.timeout, current.color)) {
+			this.currentRecallDelay = initialRecallDelay;
+			if (current.timeout > 0) {
+				setTimeout(() => this.showNotify(), current.timeout + animationDuration);
+			}
+		} else {
+			// If message show failed, re-add the current message to the front of the queue
+			this.msgs.unshift(current);
+			setTimeout(() => this.showNotify(), this.currentRecallDelay);
+			this.currentRecallDelay += recallDelayIncrement;
+		}
+	};
 
-    return (text, type = '', timeout = defaultTimeout, color = colorWhite) => {
-        this.msgs.push({text, type, timeout, color});
-        if (!this.isNotifying) {
-            this.showNotify();
-        }
-    };
+	return (text, type = '', timeout = defaultTimeout, color = colorWhite) => {
+		this.msgs.push({ text, type, timeout, color });
+		if (!this.isNotifying) {
+			this.showNotify();
+		}
+	};
 }
 
 /* Export notification container */
@@ -282,5 +283,5 @@ export default class extends React.Component {
 /* Export notification functions */
 export let notify = {
 	show,
-    createShowQueue
+	createShowQueue
 };
