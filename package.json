@@ -16,7 +16,6 @@
   "scripts": {
     "lint": "eslint src/",
     "compile": "babel -d bin/ src/",
-    "prepublish": "npm run compile",
     "read:version": "echo $npm_package_version"
   },
   "devDependencies": {
